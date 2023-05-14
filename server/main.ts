@@ -4,6 +4,14 @@ async function register ({ peertubeHelpers, registerHook }: RegisterServerOption
   peertubeHelpers.logger.info('Hello Podping')
 
   registerHook({
+    // @ts-expect-error Type doesn't exist for peertube 5.1 yet
+    target: 'action:live.video.state.updated',
+    handler: (video: Video, _req: Express.Request, _res: Express.Response) => {
+      peertubeHelpers.logger.info(`Podping: video live state updated with id: ${video.id}`)
+    }
+  })
+
+  registerHook({
     target: 'action:api.video.uploaded',
     handler: (video: Video, _req: Express.Request, _res: Express.Response) => {
       peertubeHelpers.logger.info(`Podping: video uploaded with id: ${video.id}`)
