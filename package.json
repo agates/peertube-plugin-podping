@@ -1,13 +1,13 @@
 {
-  "name": "peertube-plugin-quickstart-typescript",
-  "description": "PeerTube plugin quickstart typescript",
-  "version": "1.0.0",
+  "name": "peertube-plugin-podping",
+  "description": "PeerTube plugin Podping",
+  "version": "0.1.0",
   "license": "AGPL-3.0",
   "author": {
-    "name": "John Livingston",
-    "url": "https://github.com/JohnXLivingston"
+    "name": "Alecks Gates",
+    "url": "https://github.com/agates/peertube-plugin-podping"
   },
-  "bugs": "https://github.com/JohnXLivingston/peertube-plugin-quickstart-typescript/issues",
+  "bugs": "https://github.com/agates/peertube-plugin-podping/issues",
   "clientScripts": [
     {
       "script": "dist/client/common-client-plugin.js",
@@ -20,9 +20,9 @@
     "dist/assets/style.css"
   ],
   "engine": {
-    "peertube": ">=4.2.0"
+    "peertube": ">=5.1.0"
   },
-  "homepage": "https://github.com/JohnXLivingston/peertube-plugin-quickstart-typescript",
+  "homepage": "https://github.com/agates/peertube-plugin-podping",
   "keywords": [
     "peertube",
     "plugin"
@@ -47,18 +47,18 @@
     "fr-FR": "./languages/fr.json"
   },
   "devDependencies": {
-    "@peertube/peertube-types": "^4.2.2",
+    "@peertube/peertube-types": "^5.1.0",
     "@tsconfig/node16": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
-    "esbuild": "^0.14.36",
+    "esbuild": "^0.17.19",
     "eslint": "^8.21.0",
-    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
     "npm-run-all": "^4.1.5",
     "sass": "^1.54.5",
-    "stylelint": "^14.11.0",
-    "stylelint-config-recommended-scss": "^7.0.0",
-    "stylelint-config-standard-scss": "^5.0.0",
-    "typescript": "^4.7.4"
+    "stylelint": "^15.6.1",
+    "stylelint-config-recommended-scss": "^11.0.0",
+    "stylelint-config-standard-scss": "^9.0.0",
+    "typescript": "^5.0.4"
   }
 }

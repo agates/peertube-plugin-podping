@@ -1,4 +1,4 @@
-# PeerTube plugin Quickstart Typescript
+# PeerTube plugin Podping
 
 This is a fork of [peertube-plugin-quickstart](https://framagit.org/framasoft/peertube/peertube-plugin-quickstart)
 (See [the Peertube documentation](https://docs.joinpeertube.org/#/contribute-plugins?id=write-a-plugintheme)).
