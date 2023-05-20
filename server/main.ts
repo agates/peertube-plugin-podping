@@ -7,6 +7,7 @@ import type {
   VideoChannel
 } from '@peertube/peertube-types'
 import { CustomTag } from '@peertube/feed/lib/typings'
+import { VideoState } from '@peertube/peertube-types'
 
 // eslint-disable-next-line no-new-func,@typescript-eslint/no-implied-eval
 const importDynamic = new Function('modulePath', 'return import(modulePath)')
@@ -98,7 +99,7 @@ async function register (
         `Podping: video live state updated with id: ${videoId} - channel id: ${video.channelId}`
       )
 
-      const reason = video.isLive ? 'live' : 'liveEnd'
+      const reason = video.state === VideoState.PUBLISHED ? 'live' : 'liveEnd'
       await pingPodpingCloud(peertubeHelpers, video.channelId, reason, 'video', apiKey)
     }
   })
