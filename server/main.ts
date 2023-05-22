@@ -3,10 +3,9 @@ import type {
   PeerTubeHelpers,
   PluginSettingsManager,
   RegisterServerOptions,
-  Video,
   VideoChannel
 } from '@peertube/peertube-types'
-import { CustomTag } from '@peertube/feed/lib/typings'
+import type { CustomTag } from '@peertube/feed/lib/typings'
 import { VideoState } from '@peertube/peertube-types'
 
 // eslint-disable-next-line no-new-func,@typescript-eslint/no-implied-eval
@@ -106,46 +105,46 @@ async function register (
 
   registerHook({
     target: 'action:api.video.uploaded',
-    handler: async ({ video }: { video: Video }) => {
+    handler: async ({ video }: { video: MVideoFullLight }) => {
       const apiKey = await getSettingPodpingCloudApiKey(settingsManager)
 
       if (video.id === undefined) {
         throw new Error('Podping: video uploaded with undefined id')
       }
 
-      peertubeHelpers.logger.info(`Podping: video uploaded with id: ${video.id} - channel id: ${video.channel.id}`)
+      const videoId: number = video.id
 
-      await pingPodpingCloud(peertubeHelpers, video.channel.id, 'update', 'video', apiKey)
+      peertubeHelpers.logger.info(`Podping: video uploaded with id: ${videoId} - channel id: ${video.channelId}`)
+
+      await pingPodpingCloud(peertubeHelpers, video.channelId, 'update', 'video', apiKey)
     }
   })
 
   registerHook({
     target: 'action:api.video.updated',
-    handler: async ({ video }: { video: Video }) => {
+    handler: async ({ video }: { video: MVideoFullLight }) => {
       const apiKey = await getSettingPodpingCloudApiKey(settingsManager)
 
       if (video.id === undefined) {
         throw new Error('Podping: video updated with undefined id')
       }
 
-      peertubeHelpers.logger.info(`Podping: video updated with id: ${video.id} - channel id: ${video.channel.id}`)
+      const videoId: number = video.id
 
-      await pingPodpingCloud(peertubeHelpers, video.channel.id, 'update', 'video', apiKey)
+      peertubeHelpers.logger.info(`Podping: video updated with id: ${videoId} - channel id: ${video.channelId}`)
+
+      await pingPodpingCloud(peertubeHelpers, video.channelId, 'update', 'video', apiKey)
     }
   })
 
   registerHook({
     target: 'action:api.video.deleted',
-    handler: async ({ video }: { video: Video }) => {
+    handler: async ({ video }: { video: MVideoFullLight }) => {
       const apiKey = await getSettingPodpingCloudApiKey(settingsManager)
 
-      if (video.channel.id === undefined) {
-        throw new Error('Podping: video deleted with undefined channel id')
-      }
+      peertubeHelpers.logger.info(`Podping: video deleted with channel id: ${video.channelId}`)
 
-      peertubeHelpers.logger.info(`Podping: video deleted with channel id: ${video.channel.id}`)
-
-      await pingPodpingCloud(peertubeHelpers, video.channel.id, 'update', 'video', apiKey)
+      await pingPodpingCloud(peertubeHelpers, video.channelId, 'update', 'video', apiKey)
     }
   })
 
