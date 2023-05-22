@@ -29,7 +29,7 @@ async function getSettingPodpingCloudApiKey (settingsManager: PluginSettingsMana
 }
 
 function getPodpingCloudUrl (feedUrl: string, reason: string, medium: string): string {
-  return `https://${PODPING_CLOUD_HOST}/?url=${encodeURI(feedUrl)}&reason=${reason}&medium=${medium}`
+  return `https://${PODPING_CLOUD_HOST}/?url=${encodeURIComponent(feedUrl)}&reason=${reason}&medium=${medium}`
 }
 
 function getPodcastFeedPath (videoChannelId: number): string {
