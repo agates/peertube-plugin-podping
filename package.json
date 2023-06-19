@@ -35,16 +35,13 @@
     "build:server": "npx tsc --build server/tsconfig.json",
     "build:client": "node scripts/build.cjs",
     "build:styles": "npx sass --no-source-map assets:dist/assets",
-    "build": "npm-run-all -s clean -p build:server",
+    "build": "npm-run-all -s clean check:client:tsc -p build:server build:client build:styles",
     "lint:script": "npx eslint --ext .ts --ext .js .",
     "lint:styles": "stylelint 'assets/**/*.scss'",
     "test": "npm-run-all -p lint:script lint:styles"
   },
   "staticDirs": {
     "images": "public/images"
-  },
-  "translations": {
-    "fr-FR": "./languages/fr.json"
   },
   "devDependencies": {
     "@peertube/feed": "^5.1.0",
