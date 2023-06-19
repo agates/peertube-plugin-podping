@@ -6,7 +6,7 @@ import type {
   VideoChannel
 } from '@peertube/peertube-types'
 import type { CustomTag } from '@peertube/feed/lib/typings'
-import { VideoState } from '@peertube/peertube-types'
+import { VideoPrivacy, VideoState } from '@peertube/peertube-types'
 
 // eslint-disable-next-line no-new-func,@typescript-eslint/no-implied-eval
 const importDynamic = new Function('modulePath', 'return import(modulePath)')
@@ -86,6 +86,11 @@ async function register (
     // @ts-expect-error Type doesn't exist for peertube 5.1 yet
     target: 'action:live.video.state.updated',
     handler: async ({ video }: { video: MVideoFullLight }) => {
+      if (video.privacy !== VideoPrivacy.PUBLIC) {
+        peertubeHelpers.logger.info('Podping: live video is not public.  Ignoring')
+        return
+      }
+
       const apiKey = await getSettingPodpingCloudApiKey(settingsManager)
 
       if (video.id === undefined) {
@@ -106,6 +111,11 @@ async function register (
   registerHook({
     target: 'action:api.video.uploaded',
     handler: async ({ video }: { video: MVideoFullLight }) => {
+      if (video.privacy !== VideoPrivacy.PUBLIC) {
+        peertubeHelpers.logger.info('Podping: video is not public.  Ignoring')
+        return
+      }
+
       const apiKey = await getSettingPodpingCloudApiKey(settingsManager)
 
       if (video.id === undefined) {
@@ -123,6 +133,11 @@ async function register (
   registerHook({
     target: 'action:api.video.updated',
     handler: async ({ video }: { video: MVideoFullLight }) => {
+      if (video.privacy !== VideoPrivacy.PUBLIC) {
+        peertubeHelpers.logger.info('Podping: video is not public.  Ignoring')
+        return
+      }
+
       const apiKey = await getSettingPodpingCloudApiKey(settingsManager)
 
       if (video.id === undefined) {
@@ -140,6 +155,11 @@ async function register (
   registerHook({
     target: 'action:api.video.deleted',
     handler: async ({ video }: { video: MVideoFullLight }) => {
+      if (video.privacy !== VideoPrivacy.PUBLIC) {
+        peertubeHelpers.logger.info('Podping: video is not public.  Ignoring')
+        return
+      }
+
       const apiKey = await getSettingPodpingCloudApiKey(settingsManager)
 
       peertubeHelpers.logger.info(`Podping: video deleted with channel id: ${video.channelId}`)
