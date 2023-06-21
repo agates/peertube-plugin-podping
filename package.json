@@ -20,12 +20,13 @@
     "dist/assets/style.css"
   ],
   "engine": {
-    "peertube": ">=5.1.0"
+    "peertube": ">=5.2.0"
   },
   "homepage": "https://github.com/agates/peertube-plugin-podping",
   "keywords": [
     "peertube",
-    "plugin"
+    "plugin",
+    "podping"
   ],
   "library": "./dist/server/main.js",
   "scripts": {
@@ -45,7 +46,7 @@
   },
   "devDependencies": {
     "@peertube/feed": "^5.1.0",
-    "@peertube/peertube-types": "^5.1.0",
+    "@peertube/peertube-types": "^5.2.0",
     "@tsconfig/node16": "^1.0.3",
     "@types/node": "^16.18.30",
     "@types/node-fetch": "^2.6.4",

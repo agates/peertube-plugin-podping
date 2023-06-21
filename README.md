@@ -1,72 +1,17 @@
 # PeerTube plugin Podping
 
-This is a fork of [peertube-plugin-quickstart](https://framagit.org/framasoft/peertube/peertube-plugin-quickstart)
-(See [the Peertube documentation](https://docs.joinpeertube.org/#/contribute-plugins?id=write-a-plugintheme)).
+This is a plugin for [Podping](https://podping.org), a decentralized notification system for podcasts.
 
-Differences are:
+# Why?
 
-* both backend and frontend code are in Typescript
-* backend code is in a subdirectory, so it can easily be separated in multiple module files
-* classic CSS are replaced by [SCSS](https://fr.wikipedia.org/wiki/Sass_(langage))
-* there are linting rules to ensure code quality
+In the case of PeerTube, Podping enables any listener to know when a user has uploaded, updated, or deleted a public video and when live streams start and end.  It does so by utilizing the Podcast RSS feed on your video channels, added in PeerTube 5.2.
 
-## Compilation
+This will allow your videos to be automatically indexed by sites like the [Podcast Index](https://podcastindex.org), which [Podcast Apps](https://podcastindex.org/apps?appTypes=app) use for searching for content.  Many podcast applications support on-device live stream notifications.  We currently recommend [Podverse](https://github.com/podverse/podverse-rn), as it has the best video support for PeerTube.
 
-To compile your plugin, first install dependencies with `npm install` (you only
-have to do this the first time), then just run: `npm run build`.
+## Supported backends
 
-For more information, you can refer to the documentation for the
-[official quickstart plugin](https://docs.joinpeertube.org/#/contribute-plugins?id=write-a-plugintheme).
+Currently, the only supported backend is the main [Podping.cloud](https://github.com/Podcastindex-org/podping.cloud) service.  We are looking into supporting self-hostable options in the future.
 
-You can run `npm run clean` to empty the `dist` folder (where goes all compiled code).
+### Podping.cloud
 
-You can only rebuild part of the plugin by running one of the script defined in
-`package.json`. For example, to only rebuild backend code: `npm run build:server`.
-
-To install the plugin to your test server, you have to use the
-[Peertube CLI](https://docs.joinpeertube.org/contribute-plugins?id=test-your-plugintheme).
-
-Note: when installing multiple times the plugin, be aware that the `~/.cache/yarn`
-folder of your test server will grow... a lot. It can really fast grow to dozens
-of GB. And millions of files, filling the inode table of your disk.
-You can safely delete this folder.
-
-## Peertube version
-
-Peertube types definitions comme from the official package `@types/peertube-types`.
-To avoid problems, use same versions for `@types/peertube-types` as the supported
-peertube engine in your `package.json`.
-So, for example, if you plan to support Peertube v4.2.0 and above, use v4.2.0 for
-`@types/peertube-types` and `engine.peertube`.
-
-Note: the first stable version of `@types-peertube-types` is v4.2.0, that is why
-this quickstart plugin requires Peertube v4.2.0, althought it could work with
-older versions.
-
-## Linting
-
-To check linting, just run `npm run test`.
-
-This package comes with a `.vscode` folder that contains settings for
-Visual Studio Code. These settings ensure your Visual Studio Code uses linting
-rules. If you don't want this, you can add `.vscode` to the `.gitignore` file.
-
-Check the `.eslintrc.json` for special linting rules that I recommand
-(for example `"@typescript-eslint/no-unused-vars": [2, {"argsIgnorePattern": "^_"}]`
-that allow you to prefix unused arguments with `_`).
-
-Note: there is linting for both Typescript and SCSS files.
-
-## ESBuild vs Typescript
-
-The official `peertube-plugin-quickstart` uses ESbuild for frontend code generation.
-ESBuild can handle Typescript, but does not check types 
-(see [ESBuild documentation](https://esbuild.github.io/content-types/#typescript)).
-That's why we first comple typescript with the `-noEmit` option, just to check types.
-Then, if everything is okay, we run ESBuild to generate the compiled javascript.
-
-## Typescript version
-
-To be sure to use the right version of Typescript, Typescript is a dev dependency
-of this plugin. That's why we use `npx tsc` to compile typescript: it ensure
-your are using the version that is indicated in the `package.json` file.
+All you need for Podping.cloud is an API key, which you can obtain by emailing your instance details to [podping@podcastindex.org](mailto:podping@podcastindex.org).  Set this API key in the plugin settings.

@@ -83,7 +83,6 @@ async function register (
   })
 
   registerHook({
-    // @ts-expect-error Type doesn't exist for peertube 5.1 yet
     target: 'action:live.video.state.updated',
     handler: async ({ video }: { video: MVideoFullLight }) => {
       if (video.privacy !== VideoPrivacy.PUBLIC) {
@@ -184,7 +183,6 @@ async function register (
   })
 
   registerHook({
-    // @ts-expect-error Type doesn't exist for peertube 5.1 yet
     target: 'filter:feed.podcast.channel.create-custom-tags.result',
     handler: (result: CustomTag[]) => {
       return result.concat([
